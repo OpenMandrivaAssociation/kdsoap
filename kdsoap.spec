@@ -14,6 +14,8 @@ BuildRequires:	cmake(ECM)
 BuildRequires:	ninja
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Network)
+BuildRequires:	cmake(Qt5Xml)
+BuildRequires:	cmake(Qt5Widgets)
 
 %description
 Qt based client-side and server-side SOAP component
