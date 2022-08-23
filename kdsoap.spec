@@ -6,7 +6,7 @@
 
 Name:		kdsoap
 Version:	2.0.0
-Release:	1
+Release:	2
 Url:		https://www.kdab.com/products/kd-soap
 Source0:	https://github.com/KDAB/KDSoap/releases/download/kdsoap-%{version}/kdsoap-%{version}.tar.gz
 Patch0:		kdsoap-2.0.0-fix-qt6-codegen.patch
@@ -87,9 +87,9 @@ export CMAKE_BUILD_DIR=build-qt6
 %ninja_build -C build-qt6
 
 %install
-%ninja_install -C build
-
 %ninja_install -C build-qt6
+
+%ninja_install -C build
 
 %files -n %{libname}
 %{_libdir}/libkdsoap.so.*
