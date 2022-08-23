@@ -24,6 +24,9 @@ BuildRequires:	cmake(Qt6)
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6Network)
 BuildRequires:	cmake(Qt6Xml)
+BuildRequires:	cmake(Qt6GuiTools)
+BuildRequires:	cmake(Qt6DBusTools)
+BuildRequires:	cmake(Qt6Widgets)
 
 %description
 Qt based client-side and server-side SOAP component
