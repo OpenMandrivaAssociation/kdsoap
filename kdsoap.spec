@@ -6,7 +6,7 @@
 
 Name:		kdsoap
 Version:	2.0.0
-Release:	3
+Release:	4
 Url:		https://www.kdab.com/products/kd-soap
 Source0:	https://github.com/KDAB/KDSoap/releases/download/kdsoap-%{version}/kdsoap-%{version}.tar.gz
 Patch0:		kdsoap-2.0.0-fix-qt6-codegen.patch
@@ -88,6 +88,10 @@ export CMAKE_BUILD_DIR=build-qt6
 
 %install
 %ninja_install -C build-qt6
+# Make sure we get qt5 versions of the cmake files
+# even if the builder is fast enough to not see a
+# timestamp difference...
+rm -rf %{buildroot}%{_libdir}/cmake
 
 %ninja_install -C build
 
