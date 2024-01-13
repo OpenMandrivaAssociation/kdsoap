@@ -3,13 +3,13 @@
 %define slibname %mklibname kdsoap-server
 %define slib6name %mklibname kdsoap-server-qt6
 %define devname %mklibname -d kdsoap
+%define dev6name %mklibname -d kdsoap-qt6
 
 Name:		kdsoap
-Version:	2.0.0
-Release:	5
+Version:	2.2.0
+Release:	1
 Url:		https://www.kdab.com/products/kd-soap
 Source0:	https://github.com/KDAB/KDSoap/releases/download/kdsoap-%{version}/kdsoap-%{version}.tar.gz
-Patch0:		kdsoap-2.0.0-fix-qt6-codegen.patch
 Group:		System/Libraries
 Summary:	Qt based client-side and server-side SOAP component
 License:	GPL/AGPL/LGPL
@@ -60,15 +60,24 @@ Group:		System/Libraries
 Qt 6 based server-side SOAP component
 
 %package -n %{devname}
-Summary:	Development files for the Qt based client-side and server-side SOAP component
+Summary:	Development files for the Qt 5 based client-side and server-side SOAP component
 Group:		Development/Qt and KDE
 Requires:	%{libname} = %{EVRD}
 Requires:	%{slibname} = %{EVRD}
-Requires:	%{lib6name} = %{EVRD}
-Requires:	%{slib6name} = %{EVRD}
+Provides:	kdsoap-qt5-devel = %{EVRD}
 
 %description -n %{devname}
-Development files for the Qt based client-side and server-side SOAP component
+Development files for the Qt 5 based client-side and server-side SOAP component
+
+%package -n %{dev6name}
+Summary:	Development files for the Qt 6 based client-side and server-side SOAP component
+Group:		Development/Qt and KDE
+Requires:	%{lib6name} = %{EVRD}
+Requires:	%{slib6name} = %{EVRD}
+Provides:	kdsoap-qt6-devel = %{EVRD}
+
+%description -n %{dev6name}
+Development files for the Qt 6 based client-side and server-side SOAP component
 
 %prep
 %autosetup -p1
@@ -78,6 +87,7 @@ cd ..
 
 export CMAKE_BUILD_DIR=build-qt6
 %cmake \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
 	-DKDSoap_QT6:BOOL=ON \
 	-G Ninja
 
@@ -109,7 +119,8 @@ rm -rf %{buildroot}%{_libdir}/cmake
 
 %files -n %{devname}
 %{_bindir}/kdwsdl2cpp
-%{_libdir}/*.so
+%{_libdir}/libkdsoap.so
+%{_libdir}/libkdsoap-server.so
 %{_includedir}/KDSoapClient
 %{_includedir}/KDSoapServer
 %{_libdir}/cmake/KDSoap
@@ -117,3 +128,14 @@ rm -rf %{buildroot}%{_libdir}/cmake
 %{_libdir}/qt5/mkspecs/modules/qt_KDSoapServer.pri
 %{_datadir}/mkspecs/features/kdsoap.prf
 %doc %{_docdir}/KDSoap
+
+%files -n %{dev6name}
+%{_bindir}/kdwsdl2cpp-qt6
+%{_libdir}/libkdsoap-qt6.so
+%{_libdir}/libkdsoap-server-qt6.so
+%{_includedir}/KDSoapClient-Qt6
+%{_includedir}/KDSoapServer-Qt6
+%{_libdir}/cmake/KDSoap
+%doc %{_docdir}/KDSoap-qt6
+%{_qtdir}/mkspecs/modules/qt_KDSoapClient.pri
+%{_qtdir}/mkspecs/modules/qt_KDSoapServer.pri
