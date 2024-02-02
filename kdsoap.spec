@@ -7,7 +7,7 @@
 
 Name:		kdsoap
 Version:	2.2.0
-Release:	1
+Release:	2
 Url:		https://www.kdab.com/products/kd-soap
 Source0:	https://github.com/KDAB/KDSoap/releases/download/kdsoap-%{version}/kdsoap-%{version}.tar.gz
 Group:		System/Libraries
@@ -98,10 +98,6 @@ export CMAKE_BUILD_DIR=build-qt6
 
 %install
 %ninja_install -C build-qt6
-# Make sure we get qt5 versions of the cmake files
-# even if the builder is fast enough to not see a
-# timestamp difference...
-rm -rf %{buildroot}%{_libdir}/cmake
 
 %ninja_install -C build
 
@@ -135,7 +131,7 @@ rm -rf %{buildroot}%{_libdir}/cmake
 %{_libdir}/libkdsoap-server-qt6.so
 %{_includedir}/KDSoapClient-Qt6
 %{_includedir}/KDSoapServer-Qt6
-%{_libdir}/cmake/KDSoap
+%{_libdir}/cmake/KDSoap-qt6
 %doc %{_docdir}/KDSoap-qt6
 %{_qtdir}/mkspecs/modules/qt_KDSoapClient.pri
 %{_qtdir}/mkspecs/modules/qt_KDSoapServer.pri
