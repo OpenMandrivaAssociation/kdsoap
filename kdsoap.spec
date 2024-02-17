@@ -7,7 +7,7 @@
 
 Name:		kdsoap
 Version:	2.2.0
-Release:	2
+Release:	3
 Url:		https://www.kdab.com/products/kd-soap
 Source0:	https://github.com/KDAB/KDSoap/releases/download/kdsoap-%{version}/kdsoap-%{version}.tar.gz
 Group:		System/Libraries
